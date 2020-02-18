@@ -54,6 +54,10 @@ ggplot(estimated_pf, aes(x=successes, y=freq)) +
 ######################################################
 #Question 15
 #Create a tibble with x and the analytical probability densities.
+library(ggplot2)
+library(tidyverse)
+n <- 1000
+p <- 0.2
 my_binom<-as_tibble(list(x=0:n, prob=dbinom(0:n, n, p)))
 
 #Plot the computed theoretical density.
@@ -61,15 +65,8 @@ ggplot(my_binom, aes(x=x, y=prob)) + geom_col() +
   ylab("Analytical Density")
 
 calculated_cdf <- my_binom %>%
-  mutate(cdf=_______)
+  mutate(cdf=cumsum(prob))
 
 #Plot the computed cdf
 ggplot(calculated_cdf, aes(x=x, y=cdf)) + geom_step() + 
   ylab("CDF")
-
-
-
-
-
-
-runif(7, 3, 8)
