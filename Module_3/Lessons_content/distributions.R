@@ -4,7 +4,7 @@ library(tidyverse)
 require(cowplot)
 
 #load in the data 
-bihar_data<-read_csv("data/Bihar_sample_data.csv")
+bihar_data<-read_csv("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/Bihar_sample_data.csv")
 
 #have a look
 print(bihar_data)
@@ -18,18 +18,15 @@ print(bihar_adult_females)
 
 # default histogram in ggplot
 
-ggplot(bihar_adult_females, aes(height_cm))+
-  geom_histogram()
-ggsave("output/bihar_raw.pdf")
+ggplot(bihar_adult_females, aes(height_cm))+ geom_histogram()
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/bihar_raw.pdf")
 
 #some people look like they are very small: filtering
 bihar_adult_females_trunc <-filter(bihar_adult_females, height_cm>120, height_cm<200)
 
 #Plotting again, with a nicer label, and some color 
-ggplot(bihar_adult_females_trunc, aes(height_cm))+
-  geom_histogram(fill="blue", color="darkblue")+
-  xlab("Height in centimeters, Bihar Females")
-ggsave("output/bihar_better.pdf")
+ggplot(bihar_adult_females_trunc, aes(height_cm))+geom_histogram(fill="blue", color="darkblue")+xlab("Height in centimeters, Bihar Females")
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/bihar_better.pdf")
 
 # playing with the bins 
 
@@ -57,11 +54,11 @@ bihar4 <- ggplot(bihar_adult_females_trunc, aes(height_cm))+
   ylab("")
 
 plot_grid(bihar1, bihar2, bihar3, bihar4, labels="Female Height in Bihar", hjust=-1, vjust=0.2)
-ggsave("output/bihargrid.pdf")
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/bihargrid.pdf")
 
 
 #US Data from National Health and Nutrition Examination Survey
-us_data <- read_csv("data/US_sample_data.csv")
+us_data <- read_csv("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content//US_sample_data.csv")
 
 print(us_data)
 
@@ -75,7 +72,7 @@ print(us_adult_females_trunc)
 ggplot(us_adult_females_trunc, aes(height_cm))+
   geom_histogram(fill="red", color="darkred")+
   xlab("Height in centimeters, US females")
-ggsave("output/US_better.pdf")
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/US_better.pdf")
 
 
 
@@ -83,10 +80,10 @@ ggsave("output/US_better.pdf")
 # kernel density estimation
 
 ggplot(us_adult_females_trunc, aes(height_cm))+
-  geom_histogram(data=us_adult_females_trunc, aes(height_cm , ..density..), fill="white" , color="darkred")+
-  geom_density(kernel="gaussian", aes(height_cm))
+  geom_histogram(data=us_adult_females_trunc, aes(height_cm , ..density..), fill="grey" , color="darkred")+
+  geom_density(kernel="epanechnikov", aes(height_cm))
 
-ggsave("output/US_kernel.pdf")
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/US_kernel.pdf")
 
 
 #playing with the bandwidth
@@ -116,7 +113,7 @@ US4 <- ggplot(us_adult_females_trunc, aes(height_cm))+
   ylab("")
 
 plot_grid(US1, US2, US3, US4, labels="Female Height in the US", hjust=-1, vjust=0.2)
-ggsave("output/US_kerneltries.pdf")
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/US_kerneltries.pdf")
 
 #combining the two histograms
 ggplot(bihar_adult_females_trunc, aes(height_cm))+
@@ -138,7 +135,7 @@ ggplot(bihar_adult_females_trunc, aes(height_cm))+
   geom_freqpoly(data=us_adult_females_trunc, aes(height_cm , ..density..),  color="darkred" )+
   xlab("Height in centimeters")
 
-ggsave("output/comparehistograms.pdf")
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/comparehistograms.pdf")
 
 # Kernel density
 
@@ -147,7 +144,7 @@ ggplot(bihar_adult_females_trunc, aes(height_cm))+
   geom_density(data=us_adult_females_trunc, aes(height_cm),  color="darkred" )+
   xlab("Height in centimeters")
 
-ggsave("output/heightkernel.pdf")
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/heightkernel.pdf")
 
 # Representing the CDF
 
@@ -158,4 +155,4 @@ ggplot(bihar_adult_females_trunc, aes(height_cm))+
 
 
 
-ggsave("output/heightcdf.pdf")
+ggsave("/Users/danilo/R/MIT_Data-analysis-for-social_scientists/Module_3/Lessons_content/output/heightcdf.pdf")
